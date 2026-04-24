@@ -1,25 +1,22 @@
-# 🏀 NBA Quiz App - Development Plan
+# 🏀 NBA Quiz App - LLM-Optimized Development Plan
 
 ## 📌 Overview
 
-This document defines the step-by-step implementation plan for the NBA Quiz App based on the MVP scope and PRD created in Week 1.
-The goal is to break down the project into actionable tasks that can be executed efficiently by both developers and LLM-based tools.
+This document is structured for **LLM-assisted development** (e.g., Cursor, Copilot, ChatGPT).
+Each task is atomic, contains clear inputs/outputs, and can be executed independently.
 
 ---
 
 ## 🎯 MVP Goals
 
-* Users can start an NBA quiz
-* Questions are dynamically generated (LLM or predefined)
-* Users receive a score at the end
-* Simple and intuitive UI
-* Backend service to manage quiz logic
+* Start an NBA quiz
+* Answer multiple-choice questions
+* Get a score at the end
+* Basic UI + working API
 
 ---
 
-## 🏗️ Architecture Overview
-
-### Project Structure
+## 🏗️ Architecture
 
 ```
 nba-quiz-app/
@@ -29,190 +26,242 @@ nba-quiz-app/
 │   ├── controllers/
 │   ├── services/
 │   ├── models/
-│   └── app.(js/py)
+│   └── app.js
 │
 ├── frontend/
 │   ├── components/
 │   ├── pages/
 │   ├── services/
-│   └── app.(js/tsx)
+│   └── App.jsx
 │
 └── plan.md
 ```
 
-### Tech Stack (Suggested)
+---
 
-* Frontend: React or Next.js
-* Backend: Node.js (Express) or Python (FastAPI)
-* Database: Not required for MVP (in-memory or JSON)
-* LLM Integration: OpenAI API (optional)
+## ⚙️ GLOBAL RULES (FOR LLM)
+
+* Always write modular, clean code
+* Use clear naming conventions
+* Do not hardcode values unless specified
+* Return JSON responses from backend
+* Handle errors explicitly
 
 ---
 
-## ⚙️ Phase 1: Project Setup
+# 🚀 TASK BREAKDOWN (LLM EXECUTION READY)
 
-### Backend Setup
+## 🔹 TASK 1: Backend Initialization
 
-* Initialize backend project
-* Install dependencies
-* Setup server (Express or FastAPI)
-* Create modular folder structure
-* Configure basic routing
+### Prompt for LLM
 
-### Frontend Setup
+```
+Create a Node.js Express backend project with a basic server setup.
+Include routing structure and middleware support.
+```
 
-* Initialize React or Next.js app
-* Setup routing
-* Create component-based architecture
+### Expected Output
+
+* Express server running on port 3000
+* Folder structure created
+
+### Acceptance Criteria
+
+* Server starts without error
+* GET / returns "API running"
 
 ---
 
-## 🧠 Phase 2: Core Quiz Logic
+## 🔹 TASK 2: Question Model
 
-### Question Model
+### Prompt
+
+```
+Create a Question model in JavaScript with fields: question, options (array), answer.
+```
+
+### Expected Output
 
 ```json
 {
   "question": "string",
-  "options": ["A", "B", "C", "D"],
+  "options": ["A","B","C","D"],
   "answer": "string"
 }
 ```
 
-### API Endpoints
+### Acceptance Criteria
 
-* GET /quiz/start → returns quiz questions
-* POST /quiz/submit → evaluates answers
+* Model is reusable
+* Valid JSON structure
 
-### Backend Tasks
+---
 
-* Implement question service
-* Implement scoring algorithm
-* Return structured response:
+## 🔹 TASK 3: Quiz Routes
+
+### Prompt
+
+```
+Create Express routes for quiz:
+GET /quiz/start
+POST /quiz/submit
+```
+
+### Expected Output
+
+* Route files
+* Controller integration
+
+### Acceptance Criteria
+
+* Endpoints return valid JSON
+
+---
+
+## 🔹 TASK 4: Quiz Logic Service
+
+### Prompt
+
+```
+Implement a service that:
+- Returns 5 quiz questions
+- Validates answers
+- Calculates score
+```
+
+### Expected Output
 
 ```json
 {
   "score": 3,
-  "total": 5,
-  "correctAnswers": [...]
+  "total": 5
 }
 ```
 
-### Optional
+### Acceptance Criteria
 
-* Integrate LLM for dynamic question generation
-
----
-
-## 🎨 Phase 3: Frontend Development
-
-### Pages
-
-#### Home Page
-
-* Start Quiz button
-
-#### Quiz Page
-
-* Display questions
-* Multiple choice answers
-* Next button
-
-#### Result Page
-
-* Show score
-* Restart quiz
-
-### State Management
-
-* Track current question index
-* Store user answers
-* Manage API communication
+* Correct scoring logic
+* No crashes on invalid input
 
 ---
 
-## 🔗 Phase 4: Integration
+## 🔹 TASK 5: Frontend Initialization
 
-* Connect frontend to backend APIs
-* Handle loading states
-* Handle error states
-* Validate user inputs
+### Prompt
 
----
+```
+Create a React app with routing.
+Include pages: Home, Quiz, Result.
+```
 
-## 🚀 Phase 5: Enhancements (Optional)
+### Acceptance Criteria
 
-* Timer per question
-* Difficulty levels
-* Category selection:
-
-  * Players
-  * Teams
-  * History
-* Leaderboard (requires database)
-* Authentication system
+* App runs
+* Navigation works
 
 ---
 
-## 🧪 Phase 6: Testing
+## 🔹 TASK 6: Quiz UI
 
-### Backend
+### Prompt
 
-* API testing with Postman or Swagger
+```
+Build a quiz interface:
+- Show question
+- Show 4 options
+- Next button
+```
 
-### Frontend
+### Acceptance Criteria
 
-* Manual UI/UX testing
-
-### Edge Cases
-
-* No answer selected
-* API failure
-* Invalid response handling
-
----
-
-## 📦 Phase 7: Deployment (Optional)
-
-* Deploy backend (Render / Railway)
-* Deploy frontend (Vercel / Netlify)
-* Setup environment variables
+* User can select answers
+* Moves to next question
 
 ---
 
-## 🧩 LLM Integration Plan (Optional)
+## 🔹 TASK 7: API Integration
 
-### Use Cases
+### Prompt
 
-* Generate dynamic NBA questions
-* Adjust difficulty levels
-* Prevent repeated questions
+```
+Connect frontend to backend using fetch/axios.
+```
+
+### Acceptance Criteria
+
+* Data loads from API
+* No CORS issues
+
+---
+
+## 🔹 TASK 8: Result Page
+
+### Prompt
+
+```
+Display quiz results after submission.
+```
+
+### Acceptance Criteria
+
+* Score shown correctly
+
+---
+
+## 🔹 TASK 9: Error Handling
+
+### Prompt
+
+```
+Add error handling for API and UI.
+```
+
+### Acceptance Criteria
+
+* No crashes
+* User sees meaningful messages
+
+---
+
+## 🔹 TASK 10 (OPTIONAL): LLM Question Generator
+
+### Prompt
+
+```
+Use OpenAI API to generate NBA questions dynamically.
+```
 
 ### Example Prompt
 
 ```
-Generate 5 NBA quiz questions with 4 options each and include the correct answer.
+Generate 5 NBA quiz questions with 4 options and correct answers in JSON format.
 ```
 
----
+### Acceptance Criteria
 
-## 📊 Success Criteria
-
-* User completes full quiz flow
-* Backend evaluates answers correctly
-* UI is responsive and user-friendly
-* Codebase is modular and scalable
+* Valid JSON response
+* Questions usable in app
 
 ---
 
-## 📝 Notes
+## 📊 SUCCESS CRITERIA
 
-* Focus on MVP simplicity
-* Avoid over-engineering
-* Ensure working end-to-end flow first
+* Full quiz flow works
+* Backend + frontend connected
+* Clean, modular code
+
+---
+
+## 🧠 HOW TO USE THIS FILE WITH LLMs
+
+1. Copy one TASK at a time
+2. Paste into Cursor / ChatGPT
+3. Generate code
+4. Verify acceptance criteria
+5. Move to next task
 
 ---
 
 ## 👨‍💻 Author
 
-NBA Quiz App - Week 2 Implementation Plan
+NBA Quiz App - LLM Optimized Plan
